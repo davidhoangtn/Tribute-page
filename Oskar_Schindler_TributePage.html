@@ -1,0 +1,548 @@
+<!-- User Story #1: My tribute page should have an element with a corresponding id="main", which contains all other elements.
+
+User Story #2: I should see an element with a corresponding id="title", which contains a string (i.e. text) that describes the subject of the tribute page (e.g. "Dr. Norman Borlaug").
+
+User Story #3: I should see either a figure or a div element with a corresponding id="img-div".
+
+User Story #4: Within the img-div element, I should see an img element with a corresponding id="image".
+
+User Story #5: Within the img-div element, I should see an element with a corresponding id="img-caption" that contains textual content describing the image shown in img-div.
+
+User Story #6: I should see an element with a corresponding id="tribute-info", which contains textual content describing the subject of the tribute page.
+
+User Story #7: I should see an a element with a corresponding id="tribute-link", which links to an outside site that contains additional information about the subject of the tribute page. HINT: You must give your element an attribute of target and set it to _blank in order for your link to open in a new tab (i.e. target="_blank").
+
+User Story #8: The img element should responsively resize, relative to the width of its parent element, without exceeding its original size.
+
+User Story #9: The img element should be centered within its parent element. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    #img-caption {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 52px;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 30px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 25px;
+        font-weight: 500;
+        color: #222222;
+        text-align: center;
+    }
+
+    h4 {
+        font-size: 21px;
+        font-weight: 400;
+
+    }
+
+    h5 {
+        font-size: 17px;
+        font-weight: 300;
+
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .portrait {
+        background: lightgray;
+        grid-area: portrait;
+
+    }
+
+    fieldset {
+        min-width: 900px;
+        padding-left: 40px;
+    }
+
+    .navigation {
+        background: lightgray;
+        grid-area: navigation;
+
+    }
+
+    .his-work-begins {
+        background: lightgray;
+        grid-area: his-work-begins;
+    }
+
+    .early-life {
+        background: lightgray;
+        grid-area: early-life;
+    }
+
+    .in-poland {
+        background: lightgray;
+        grid-area: in-poland;
+    }
+
+    .the-list {
+        background: lightgray;
+        grid-area: the-list;
+    }
+
+    .end-of-war {
+        background: lightgray;
+        grid-area: end-of-war;
+    }
+
+    .legacy {
+        background: lightgray;
+        grid-area: legacy;
+    }
+
+    .content {
+        font-size: 1em;
+        min-height: 300px;
+        min-width: 1000px;
+        background: lightgray;
+        grid-area: content;
+        width: 100%;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            "early-life"
+            "in-poland"
+            "his-work-begins"
+            "the-list"
+            "end-of-war"
+            "legacy"
+    }
+
+    .footer {
+        background: lightgray;
+        grid-area: footer;
+        margin: auto;
+    }
+
+
+    .container {
+        font-size: 1em;
+        min-height: 300px;
+        width: 100%;
+        background: LightGray;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px auto auto;
+        grid-gap: 10px;
+        grid-template-areas:
+            "portrait"
+            "navigation"
+            "content"
+            "footer";
+
+    }
+
+    @media (min-width: 300px) {
+        .content {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-areas:
+                "early-life"
+                "in-poland"
+                "his-work-begins"
+                "the-list"
+                "end-of-war"
+                "legacy"
+        }
+    }
+
+    @media (min-width: 400px) {
+        .content {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-areas:
+                /* Only change code below this line */
+                "early-life"
+                "in-poland"
+                "his-work-begins"
+                "the-list"
+                "end-of-war"
+                "legacy"
+                /* Only change code above this line */
+        }
+    }
+
+    @media (min-width: 300px) {
+        .container {
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "navigation portrait"
+                "navigation content"
+                "footer     footer"
+        }
+    }
+
+    @media (min-width: 400px) {
+        .container {
+            grid-template-areas:
+                /* Only change code below this line */
+                "navigation portrait"
+                "navigation content"
+                "footer     footer"
+                /* Only change code above this line */
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+        border: 1px solid #555;
+    }
+
+    li {
+        text-align: center;
+        border-bottom: 1px solid #555;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+        line-height: 10px;
+    }
+
+    li:last-child {
+        border-bottom: none;
+    }
+
+    li a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+
+    legend {
+        text-align: center;
+    }
+
+    #image {
+        width: 500px;
+        height: 400px;
+        margin: auto;
+        align-self: flex-start;
+    }
+
+    #timeline {
+        margin: auto;
+        top: -200px;
+        min-width: 300px;
+        background-color: lightgray;
+        align-self: flex-end;
+    }
+
+    .inner-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .img-div {
+        float: left;
+    }
+
+    .timeline-div {
+        float: right;
+        padding-top: 30px;
+    }
+</style>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="portrait" id="portrait">
+                <h1><strong>Mr. Oskar Schindler</strong></h1>
+                <h2 text-align="center"><i>"He who saves one life, saves the world entire."</i></h2>
+                <h3>A Nazi, businessman, and war profiteer that later became a war hero who saved 1100 Jewish lives.
+                </h3>
+                <figure><img src="https://collections.ushmm.org/iiif-b/assets/780403"
+                        alt="Picture of Oskar Schindler with the Jews he saved one year after WWII">
+                    <figcaption id="img-caption">
+                        "Oskar Schindler (second from top right) standing besides the Jewish survivors he saved one year
+                        after WWII"
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a class="active" href="#portrait">Home</a></li>
+                    <li><a href="#early-life">Early Life</a></li>
+                    <li><a href="#in-poland">In Poland</a></li>
+                    <li><a href="#his-work-begins">His Work Begins</a></li>
+                    <li><a href="#the-list">The List</a></li>
+                    <li><a href="#end-of-war">End of War</a></li>
+                    <li><a href="#legacy">Legacy</a></li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <div class="early-life" id="early-life">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>Early Life</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://i.dailymail.co.uk/i/pix/2010/03/22/article-1259835-0014DED600000258-8_468x298.jpg"
+                                        alt="Oskar Schindler and his wife Emilie Schindler">
+                                    <figcaption id="img-caption">
+                                        "Oskar Schindler and his wife Emilie Schindler."
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>Born in Austria-Hungary on 28 April 1908</li>
+                                    <li>Worked for his father during 1920s. After his marriage, Oskar left his father's
+                                        business to work
+                                        as
+                                        a
+                                        sales manager for a Moravian electric company</li>
+                                    <li>In 1935, Schindler joined the pro-Nazi Sudeten German Party to profit from
+                                        Hitler's rise to power.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+
+                <div class="in-poland" id="in-poland">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>In Poland</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/1631029/factory460.jpg"
+                                        alt="Oskar Schindler and his secretarial staff standing in front of his enamel factory">
+                                    <figcaption id="img-caption">
+                                        "Oskar Schindler and his secretarial staff standing in front of his enamel
+                                        factory.
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>In 1939, Hitler invaded Poland. Schindler quickly created friendships
+                                        with key officers in both the German army and the SS (special Nazi unit)
+                                        by offering black-market goods that were hard to find.
+                                    </li>
+                                    <li>At the same time, Schindler hired Irzhak Stern, a Jewish accountant, as the
+                                        bookkeeper
+                                        for his enamel factory. Stern convinced Mr.Schindler to hire 56,000 Jews
+                                        as they were a good source of cheap and reliable labor
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="his-work-begins" id="his-work-begins">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>His work begins</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Schindlers_factory_Brnenec_CZ_2004a.JPG/1280px-Schindlers_factory_Brnenec_CZ_2004a.JPG"
+                                        alt="Schindler's labor working camp to keep his Jewish worker alive in the concentration camp.">
+                                    <figcaption id="img-caption">
+                                        "Schindler's labor working camp to keep his Jewish worker alive in the
+                                        concentration camp."
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>In 1942, Nazis began relocating Krakow's Jews to labor camps, including
+                                        Schindler's workers.
+                                        Schindler
+                                        raced to the train station, and rescued the workers by making a couple of
+                                        threats and dropping names
+                                        of
+                                        his Nazi friends. </li>
+                                    <li>Early 1943, Nazis liquidated Krakow ghetto: those who could work were sent to
+                                        Plaszow while the
+                                        rest
+                                        were killed or sent to death camps. Schindler established a labor mini-camp
+                                        within Plaszow to
+                                        continue
+                                        employing his workers, after bribing the young SS officer in charge Amon Goeth.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+
+                <div class="the-list" id="the-list">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>The List</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://img2.grunge.com/img/gallery/the-true-story-about-oskar-schindler-from-schindlers-list/schindler-didnt-write-the-list-1546972545.jpg"
+                                        alt="Schindler's list of Jewish survivor he saved as his factory workers.">
+                                    <figcaption id="img-caption">
+                                        Schindler's list of Jewish survivor he saved as his factory workers.
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>Early 1944, all of Plaszow's prisoners were ordered to transport to death camps
+                                        such as Auschwitz,
+                                        and
+                                        then the main camp was forced to be closed including Schindler's factory.
+                                        Schindler approached Goeth
+                                        about moving his factory and workers to Czech to continue supplying Hitler's
+                                        army war supplies.</li>
+                                    <li>Goeth agreed and tole Schindler to drew up a list, in which is literally a
+                                        matter of life and
+                                        death.
+                                        Schindler came up of a list containing 1100 hundred names including his workers
+                                        and number of
+                                        others.
+                                    </li>
+                                    <li> Fall of 1944, Schindler began moving his factory to Brunnlitz after a few
+                                        necessary bribes. 800
+                                        men
+                                        were shipped out in boxcar bounds to Brunnlitz, while 300 women and children
+                                        were mistakenly sent to
+                                        Auschwitz. Schindler immediately rescued these women and children, and sent them
+                                        to Brunnlitz.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="end-of-war" id="end-of-war">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>End of War</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Feb6f96_d88019ca18b44e1ab5f70390650dca7b~mv2_d_3000_1609_s_2.jpg%2Fv1%2Ffill%2Fw_1000%2Ch_536%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Feb6f96_d88019ca18b44e1ab5f70390650dca7b~mv2_d_3000_1609_s_2.jpg&f=1&nofb=1"
+                                        alt="Oskar Schindler gathered his factory workers to announce end of war.">
+                                    <figcaption id="img-caption">
+                                        "Oskar Schindler gathered his factory workers to announce end of war."
+                                    </figcaption>
+
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>1945, German surrendered. Schindler gathered all his workers to deliver the good
+                                        news and call for
+                                        a
+                                        moment of silence in memory of those who had passed. He also encouraged members
+                                        of SS who were
+                                        present
+                                        to go home with their family peacefully without further bloodshed. </li>
+                                    <li>Before fleeing with his wife to the US for fear of capture, Schindler's workers
+                                        endowed him a ring
+                                        forged out of silver denture, wrote: "He who saves one life, saves the world
+                                        entire." </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+
+                <div class="legacy" id="legacy">
+                    <fieldset>
+                        <legend>
+                            <h3><strong>Legacy</strong></h3>
+                        </legend>
+                        <div class="inner-box">
+                            <div class="img-div">
+                                <figure>
+                                    <img id="image"
+                                        src="https://th.bing.com/th/id/OIP.j-GIwcvfTh6Z4Jij1aIrGAHaJ4?pid=ImgDet&rs=1"
+                                        alt="Jews who were saved by Oskar and their future generations paid tribute to him by placing stones on his grave.">
+                                    <figcaption id="img-caption">
+                                        "Jews who were saved by Oskar and their future generations paid tribute to him
+                                        by placing stones on
+                                        his
+                                        grave."
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <div class="timeline-div">
+                                <ul id="timeline">
+                                    <li>After the war, Schindler were virtually destitute after spending his entire
+                                        fortunes on bribes and
+                                        black market supplies for his workers</li>
+                                    <li>He went on a series of business ventures in cement, raising chicken but none of
+                                        which were
+                                        successful.
+                                        He declared bankruptcy in 1963.</li>
+                                    <li>In his final days, he survived on the donations sent by Schindlerjuden
+                                        (Schindler's Jews) from all
+                                        over the world.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="footer" id="footer">
+                <strong>If you have time, you should read more about this incredible human being on his <a
+                        href="https://en.wikipedia.org/wiki/Oskar_Schindler">Wikipedia entry</a></strong>.
+            </div>
+
+        </div>
+    </main>
+</body>
